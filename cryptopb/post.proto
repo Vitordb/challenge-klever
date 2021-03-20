@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = ".;postpb";
+
+message Post {
+  string id = 1;
+  string title = 2;
+  int64 votes = 3;
+}
+
+message CreatePostRequest {
+  Post post = 1;
+}
+
+message CreatePostResponse {
+  Post post = 1;
+}
+
+message GetPostRequest {
+  string id = 1;
+}
+
+message GetPostResponse {
+  Post post = 1;
+}
+
+message UpdatePostRequest {
+  Post post = 1;
+}
+
+message UpdatePostResponse {
+  Post post = 1;
+}
+
+message DeletePostRequest {
+  string id = 1;
+}
+
+message DeletePostResponse {
+  bool success = 1;
+}
+
+message ListPostsRequest {}
+
+message ListPostsResponse {
+  repeated Post post = 1;
+}
+
+message UpVoteRequest {
+  Post post = 2;
+}
+
+message UpVoteResponse {
+  Post post = 1;
+}
+
+message DownVoteRequest {
+  Post post = 2;
+}
+
+message DownVoteResponse {
+  Post post = 1;
+}
+
+service PostService {
+  rpc CreatePost(CreatePostRequest) returns (CreatePostResponse);
+  rpc GetPost(GetPostRequest) returns (GetPostResponse);
+  rpc UpdatePost(UpdatePostRequest) returns (UpdatePostResponse);
+  rpc DeletePost(DeletePostRequest) returns (DeletePostResponse);
+  rpc ListPosts(ListPostsRequest) returns (ListPostsResponse);
+  rpc UpVote(UpVoteRequest) returns (UpVoteResponse);
+  rpc DownVote(DownVoteRequest) returns (DownVoteResponse);
+}
